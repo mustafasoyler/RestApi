@@ -6,6 +6,7 @@ import com.mustafa.rest.dto.UserViewDTO;
 import com.mustafa.rest.service.UserService;
 import com.mustafa.rest.util.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,5 +55,10 @@ public class UserAPI {
         userService.deleteUser(id);
         return ResponseEntity.ok(new GenericResponse("User deleted"));
 
+    }
+    @GetMapping("v1/user/slice")
+    public ResponseEntity<List<UserViewDTO>> slice(Pageable pageable){
+       List<UserViewDTO> users=userService.slice(pageable);
+        return ResponseEntity.ok(users);
     }
 }
