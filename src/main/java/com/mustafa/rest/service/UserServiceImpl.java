@@ -1,5 +1,6 @@
 package com.mustafa.rest.service;
 
+import com.mustafa.rest.dto.UserCreateDTO;
 import com.mustafa.rest.dto.UserViewDTO;
 import com.mustafa.rest.exception.NotFoundException;
 import com.mustafa.rest.model.User;
@@ -20,6 +21,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserViewDTO getUserById(Long id) {
          User user= userRepository.findById(id).orElseThrow(() -> new NotFoundException("User Not Found Exception"));
+        return UserViewDTO.of(user);
+    }
+
+    @Override
+    public UserViewDTO createUser(UserCreateDTO userCreateDTO) {
+        User user =userRepository.save(new User(userCreateDTO.getFirstName(), userCreateDTO.getLastName()));
         return UserViewDTO.of(user);
     }
 }
