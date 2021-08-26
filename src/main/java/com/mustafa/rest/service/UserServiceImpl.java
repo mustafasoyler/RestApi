@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UserViewDTO createUser(UserCreateDTO userCreateDTO) {
-        User user =userRepository.save(new User(userCreateDTO.getFirstName(), userCreateDTO.getLastName()));
+        User user =userRepository.save(new User(userCreateDTO.getUserName(), userCreateDTO.getFirstName(), userCreateDTO.getLastName()));
         return UserViewDTO.of(user);
     }
 
